@@ -1,0 +1,254 @@
+<template>
+    <view class="container">
+        <view>
+            <card title="档案管理" :titleStyle="titleStyle">
+                <view slot="header">
+                    <view class="title-box">
+                        <view class="text">档案管理</view>
+                        <u-icon name="eye" color="#808080" size="20" style="margin-left:5px" @click="mangerClick"></u-icon>
+                    </view>
+                </view>
+               <view>
+                   <view v-for="(item,index) in daDate" :key="index">
+                     <view>{{item.name}}</view>
+                  <view style="display:flex;align-items: center">
+                    <u-line-progress :percentage="Number(item.rate)" activeColor="#FBBB8B" style="width:60%"></u-line-progress>
+                  </view>
+                   </view>
+                    <view>总量控制</view>
+                  <uni-data-select
+                   v-model="value"
+                   :localdata="range"
+                   ></uni-data-select>
+                   <view style="display:flex;align-items: center">
+                    <view style="margin-right:10px">COD</view>
+                    <u-line-progress :percentage="30" activeColor="#FBBB8B" :showText="false" style="width:60%"></u-line-progress>
+                  </view>
+               </view>
+            </card>
+        </view>
+       <view class="card-box">
+            <card title="申报提醒" :titleStyle="titleStyle">
+                <view slot="header">
+                    <view class="title-box">
+                        <view class="text" >环保工况</view>
+                         <uni-data-checkbox mode="tag" v-model="radio2" :localdata="sex"  style="margin:5px 0 0 5px;width:84%"></uni-data-checkbox>
+                        <u-icon name="eye" color="#808080" size="16"></u-icon>
+
+                    </view>
+                    <EveryMonth  v-if="radio2 == 0"/>
+                    <Factor v-if="radio2 == 1"/>
+                </view>
+            </card>
+        </view>
+         <view class="card-box">
+            <card title="申报管理" :titleStyle="titleStyle">
+                <view slot="header">
+                    <view class="title-box">
+                        <view class="text">申报管理</view>
+                        <u-icon name="eye" color="#808080" size="20" style="margin-left:5px"></u-icon>
+                    </view>
+                        <Manger />
+                </view>
+                <!-- <polling class="echart-box" :date="dateParams.polling" ref="pollingRef"></polling> -->
+            </card>
+        </view>
+        
+         <view class="card-box">
+            <card title="台账管理" :titleStyle="titleStyle">
+                <view slot="header">
+                    <view class="title-box">
+                        <view class="text">台账管理</view>
+                        <u-icon name="eye" color="#808080" size="20" style="margin-left:5px"></u-icon>
+                    </view>
+                        <!-- <Ledger :date="dateParams.polling"/> -->
+                </view>
+                <polling class="echart-box" :date="dateParams.polling" ref="pollingRef"></polling>
+            </card>
+        </view>
+        <view class="card-box">
+            <card title="政企通" :titleStyle="titleStyle">
+                <view slot="header">
+                    <view class="title-box">
+                        <view class="text">政企通</view>
+                        <u-icon name="eye" color="#808080" size="20" style="margin-left:5px"></u-icon>
+                    </view>
+                        <Manger />
+                </view>
+                <!-- <polling class="echart-box" :date="dateParams.polling" ref="pollingRef"></polling> -->
+            </card>
+        </view>
+        <u-datetime-picker mode="year" :show="yearsPicker" @cancel="yearsPicker = false" @confirm="yearPickeConfirm"></u-datetime-picker>
+        <u-datetime-picker mode="date" :show="datePicker" @cancel="datePicker = false" @confirm="datePickeConfirm"></u-datetime-picker>
+    </view>
+</template>
+
+<script>
+import Card from '@/components/Card.vue';
+import Warning from '../components/warning.vue';
+import Analyse from '../components/analyse.vue';
+import Polling from '../components/polling.vue';
+import EveryMonth from '../components/every-month.vue';
+import Factor from '../components/factor.vue';
+import Ledger from '../components/Ledger.vue';
+import Manger from '../components/Manger.vue';
+export default {
+    components:{
+        Card,
+        Warning,
+        Analyse,
+        Polling,
+        EveryMonth,
+        Factor,
+        Ledger,
+        Manger
+    },
+    data(){
+        return{
+            dateParams:{
+                warning:'',
+                analyse:'',
+                polling:'',
+            },
+            inputIconStyle:{
+                fontSize:'14px',
+
+            },
+            inputStyle:{
+                padding:'5rpx 10rpx !important',
+                height:'20px'
+            },
+            titleStyle: {
+                fontSize: '26rpx',
+                color: '#2C8BFF',
+                fontWeight: '600'
+            },
+            checkedKey:'',
+            datePicker:false,
+            yearsPicker:false,
+            value: null,
+        range: [
+          { value: 0, text: "废水" },
+          { value: 1, text: "废气" },
+        ],
+         sex: [{
+					text: '每月报警',
+					value: 0
+				}, {
+					text: '因子报警',
+					value: 1
+				},
+             ],
+        radio2:0,
+        mangerShow:false,
+        daDate:[],
+        waterDate:[],
+        powerDate:[]
+       
+        }
+    },
+    mounted(){
+        // this.init();
+        this.getDadate(),
+        this.getwaterdate()
+    },
+    methods:{
+        getTime(){
+            let date = new Date();
+            let y = date.getFullYear();
+            return {
+                year:y
+            }
+        },
+        init(){
+            let date = this.getTime();
+            this.dateParams.warning = date.year;
+            this.dateParams.analyse = date.year;
+            this.dateParams.polling = date.year;
+            this.$refs.warningRef.initEchart();
+            this.$refs.analyseRef.initEchart();
+            this.$refs.pollingRef.initEchart();
+        },
+        openYearPicker(key){
+            this.checkedKey = key;
+            this.yearsPicker = true;
+        },
+        openTimePicker(key){
+            this.checkedKey = key;
+            this.datePicker = true;
+        },
+        yearPickeConfirm(e){
+            let y = this.$u.timeFormat(e.value, 'yyyy');
+            this.dateParams[this.checkedKey] = y;
+            this.$nextTick(()=>{
+                this.$refs[this.checkedKey+'Ref'].getData();
+            })
+            this.yearsPicker = false;
+        },
+        datePickeConfirm(e){
+            this.dateParams[this.checkedKey] = this.$u.timeFormat(e.value, 'yyyy-mm-dd');
+            this.datePicker = false;
+        },
+        mangerClick(){
+            this.mangerShow = true
+        },
+      async getDadate(){
+            const res = await  this.$service.statistics.getdaDate()
+            this.daDate = res.data
+        },
+        //废水
+         async getwaterdate(){
+            const res = await  this.$service.statistics.getWaterDate({
+                yzlb:'废水'
+            })
+            this.waterDate = res.data
+        },
+         //废气
+         async getpowerdate(){
+            const res = await  this.$service.statistics.getWaterDate({
+                yzlb:'废气'
+            })
+            this.powerDate = res.data
+        },
+    }
+}   
+</script>
+
+<style lang="scss" scoped>
+    .container{
+        padding: 30rpx 30rpx 50rpx 30rpx;
+        background: #F9FAFA;
+    }
+    .echart-box{
+        width: 100%;
+        /* min-height: 500rpx; */
+    }
+    .card-box{
+        margin-top: 20rpx;
+    }
+    .title-box{
+        line-height: 80rpx;
+        font-size: 35rpx;
+        position: relative;
+        display: flex;
+        align-items: center;
+        // justify-content: space-between;
+        &::after {
+            content: "";
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            border-bottom: 1px solid #f5f6f8;
+        }
+        .text{
+            font-size: 26rpx;
+            color:#2C8BFF;
+            font-weight: 600;
+            margin-left: 20rpx;
+        }
+        .picker{
+            width: 160rpx;
+            margin-right: 20rpx;
+        }
+    }
+</style>

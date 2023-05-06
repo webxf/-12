@@ -1,0 +1,189 @@
+<template>
+  <view>
+    <u--form labelPosition="left" labelWidth="50" :model="queryParams" style="padding:5px 10px 0 10px">
+          <u-form-item label="时间：" @click="timePicker = true">
+             <u--input v-model="queryParams.kssj" suffixIcon="arrow-down" suffixIconStyle="color: #909399" disabled
+              disabledColor="#ffffff" placeholder="请选择日期"></u--input>
+             </u-form-item>
+             <u-form-item label="状态：" @click="timePicker = true">
+             <u--input v-model="queryParams.kssj" suffixIcon="arrow-down" suffixIconStyle="color: #909399" disabled
+              disabledColor="#ffffff" placeholder="请选择日期"></u--input>
+             </u-form-item>
+      </u--form>
+         <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;width:94%">
+			<view class="item-text">
+			    <text>巡检名称:</text>
+			    <text>{{info.fddbr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡检类型:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+			<view class="item-text">
+			    <text>巡查时间:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡查人员:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡检状态:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+			<view class="item-text edit">
+			    <view>巡查操作:</view>
+                <view style="display:flex">
+                    <button style="background:rgb(22,155,213)" @click="goDetail">详情</button>
+                    <button style="background:rgb(196,196,196)">删除</button>
+                </view>
+			</view>
+		</card>
+         <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;width:94%">
+			<view class="item-text">
+			    <text>巡检名称:</text>
+			    <text>{{info.fddbr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡检类型:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+			<view class="item-text">
+			    <text>巡查时间:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡查人员:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+            <view class="item-text">
+			    <text>巡检状态:</text>
+			    <text>{{info.hbfzr}}</text>
+			</view>
+			<view class="item-text edit">
+			    <view>巡查操作:</view>
+                <view style="display:flex">
+                    <button style="background:rgb(22,155,213)" @click="edit">编辑</button>
+                    <button style="background:rgb(196,196,196)">删除</button>
+                </view>
+			</view>
+		</card>
+        <button class="btn" @click="show = true">新增</button>
+       <u-popup :show="show" :round="4" mode="center" @close="close" @open="open" style="width:96%">
+		<view class="pop-show">新增巡检</view>
+		<view class="ipt"  style="padding:0 0 10px 10px">
+        <view class="pop-ipt" style="margin-bottom:10px">新增巡检</view>
+      <view class="add">
+           <input
+         border="surround"
+         v-model="value"
+         @change="change"
+  />
+      </view>
+   <view class="pop-ipt" style="margin:10px 0">巡检类型</view>
+         <uni-data-select
+                   v-model="value"
+                   :localdata="range"
+                   style="width:96%"
+                   ></uni-data-select>
+   <view class="pop-ipt" style="margin:10px 0">巡检时间</view>
+        <u--input v-model="queryParams.kssj" suffixIcon="arrow-down" suffixIconStyle="color: #909399" disabled
+              disabledColor="#ffffff" placeholder="请选择日期" style="width:90%"></u--input>
+        </view>
+	</u-popup>
+  </view>
+</template>
+
+<script>
+import Card from '@/components/Card.vue'
+export default {
+     components: {
+        Card
+    },
+    data(){
+        return {
+              queryParams: {sjlx:1,pageNo:1,pageSize:10,pkmc:'',pkbh:'',pklx:''},
+                 titleStyle: {
+                fontSize: '28rpx',
+                color: '#2C8BFF',
+                textAlign: 'center',
+            },
+            info:{},
+            show:false,
+             value: ''
+        }
+    },
+    methods:{
+           open() {
+        // console.log('open');
+      },
+      close() {
+        this.show = false
+        // console.log('close');
+      },
+       change(e) {
+          console.log('change', e);
+        },
+        //点击跳转到详情
+        goDetail(){
+            uni.navigateTo({
+                url:'environment-detail'
+            })
+        },
+        //点击跳转到编辑
+        edit(){
+            uni.navigateTo({
+                url:'edit-patrol'
+            }) 
+        }
+    }
+}
+</script>
+
+<style scoped lang='scss'>
+    .edit {
+        display: flex;
+        button {
+            height: 30px;
+            font-size: 14px;
+            margin-left: 10px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+        }
+    }
+    .btn {
+        width: 30%;
+        height: 40px;
+        background-color:rgb(22,155,213);
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        line-height: 40px;
+        position: absolute;
+        bottom: 20px;
+        left: 35%;
+    }
+    .contain {
+        width: 90%;
+        height: 100px;
+        background-color: #fff;
+    }
+    ::v-deep .u-popup__content {
+        width: 90%;
+        height: 300px;
+    }
+    .pop-show {
+        padding:15px;
+        font-size:18px;
+        font-weight: bold;
+    }
+    .add {
+        ::v-deep .uni-input-input {
+        width: 96%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        height: 40px;
+    }
+    }
+</style>

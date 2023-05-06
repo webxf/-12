@@ -1,0 +1,214 @@
+<template>
+  <view class="remind">
+    <uni-data-checkbox mode="tag" v-model="radio2" :localdata="sex" @change="select" style="padding:10px"></uni-data-checkbox>
+     <view class="container" v-if="radio2 == 0">
+        <card :titleStyle="titleStyle" v-for="item in EmergencyDate" :key="item.createUserId" class="cardStyle">
+			<view class="item-text">
+			    <text>预案名称：</text>
+			    <text>{{item.bt}}</text>
+			</view>
+			<view class="item-text">
+			    <text>发布单位：</text>
+			    <text>{{item.fbdwmc}}</text>
+			</view>
+			<view class="item-text">
+			    <text>发布时间：</text>
+			    <text>{{item.fbsj}}</text>
+			</view>
+			<view class="item-text">
+			    <text>备案时间：</text>
+			    <text>{{item.basj}}</text>
+			</view>
+			<view class="item-text">
+			    <text>预案类别：</text>
+			    <text>{{item.yalb}}</text>
+			</view>
+			<view class="item-text">
+			    <text>风险等级：</text>
+			    <text>{{item.fxdj}}</text>
+			</view>
+			<view class="item-text">
+			    <text>到期时间：</text>
+			    <text>{{item.dqsj}}</text>
+			</view>
+            <view class="item-text">
+                <text>当前状态：</text>
+                <text style="color:red">{{item.dqzt}}</text>
+            </view>
+		</card>
+     </view>
+       <view class="container" v-if="radio2 == 1">
+        <card :titleStyle="titleStyle" v-for="(item,index) in cleanDate" :key="index" class="cardStyle">
+			<view class="item-text">
+			    <text>预案名称：</text>
+			    <text>{{item.wjmc}}</text>
+			</view>
+			<view class="item-text">
+			    <text>编制单位：</text>
+			    <text>{{item.xgdw}}</text>
+			</view>
+			<view class="item-text">
+			    <text>审核年份：</text>
+			    <text>{{item.sj}}</text>
+			</view>
+			<view class="item-text">
+			    <text>生产报告：</text>
+			    <text>{{info.tyshxydm}}</text>
+			</view>
+			<view class="item-text">
+			    <text>验收文件：</text>
+			    <a href="item.fjs[0].path" download>{{item.fjs[0].realName}}</a>
+			</view>
+			<view class="item-text">
+			    <text>当前状态：</text>
+			    <text style="color:red">{{item.dqsj}}</text>
+			</view>
+		</card>
+     </view>
+      <view class="container" v-if="radio2 == 2">
+        <view style="padding:10px;font-size:16px">废气</view>
+        <card :titleStyle="titleStyle" class="cardStyle">
+			<view class="item-text" v-for="(item,index) in gasArr" :key="index">
+			    <text>{{item.yzmc}}：</text>
+			    <text>{{item.pfzl}}吨/{{item.rate}}吨</text>
+			</view>
+		</card>
+          <view style="padding:10px;font-size:16px">废水</view>
+        <card :title="info.qymc" :titleStyle="titleStyle" class="cardStyle">
+			<view class="item-text" v-for="(item,index) in waterArr" :key="index">
+			    <text>{{item.yzmc}}:</text>
+			    <text>{{item.pfzl}}吨/{{item.rate}}吨</text>
+			</view>
+		</card>
+     </view>
+    <view class="btn">
+     <button style="margin-right:20px">学习中心</button>
+     <button>项目管理</button>
+    </view>
+  </view>
+</template>
+
+<script>
+import Card from '@/components/Card.vue'
+export default {
+     components: {
+        Card
+    },
+    data(){
+        return {
+            sex: [{
+					text: '应急预案',
+					value: 0
+				}, {
+					text: '清洁生产',
+					value: 1
+				}, {
+					text: '总量控制',
+					value: 2
+				}],
+        radio2:0,
+          titleStyle: {
+                fontSize: '28rpx',
+                color: '#2C8BFF',
+                textAlign: 'center'
+            },
+            info:{},
+			EmergencyDate:[],//应急预案数据
+			cleanDate:[],//清洁生产数据
+			exhaustGas:'废气',
+			exhaustWater:'废水',
+			gasArr:[],
+			waterArr:[]
+        }
+    },
+	mounted(){
+		this.getDate()
+	},
+    methods:{
+		//获取应急预案数据
+	    async getDate(){
+            const res = await  this.$service.statistics.getEmergencyDate()
+			this.EmergencyDate = res.data
+		},
+		//获取清洁数据
+		async cleanProduct(){
+			const res = await  this.$service.statistics.getCleanDate()
+			this.cleanDate = res.data
+			console.log(this.cleanDate);
+		},
+		//获取控制总量数据
+		async getSumDate(){
+			const res = await  this.$service.statistics.getSumDate({
+				yzlb:this.exhaustGas
+			})
+			this.gasArr = res.data
+		},
+		//获取废水总量
+		async getWaterDate(){
+			const res = await  this.$service.statistics.getSumDate({
+				yzlb:this.exhaustWater
+			})
+			this.waterArr = res.data
+		},
+        select(i){
+            if(i.detail.value == 0) {
+				this.getDate()
+			}else if(i.detail.value == 1) {
+				this.cleanProduct()
+			}else if(i.detail.value == 2) {
+				this.getSumDate()
+				this.getWaterDate()
+			}
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+    .remind {
+        .remind-detail {
+            .container {
+                 padding: 30rpx 30rpx 0 30rpx;
+                 background: #F9FAFA;
+}
+
+.item-text {
+    display: flex;
+    font-size: 26rpx;
+
+    & text:first-child {
+        color: #3E4244;
+        // min-width: 25%;
+        font-weight: 600;
+        text-align: right;
+		white-space: nowrap;
+    }
+
+    & text:last-child {
+        color: #ACACAC
+    }
+
+    image {
+        width: 200rpx;
+        border-radius: 8rpx;
+    }
+}
+        }
+    }
+    .btn {
+        display: flex;
+        position: absolute;
+        bottom:40px;
+        left: 25%;
+        button {
+            background-color:rgb(22,155,213);
+            color: #fff;
+            font-size: 14px;
+        }
+    }
+	.cardStyle {
+		margin-left:10px;
+		margin-top:10px;
+		width:94%;
+	}
+</style>

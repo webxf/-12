@@ -1,0 +1,373 @@
+{
+  "easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [
+        {
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "工作台"
+			}
+		},
+        {
+			"path": "pages/archives/index",
+			"style": {
+				"navigationBarTitleText": "档案管理"
+			}
+		},
+        {
+			"path": "pages/declare/index",
+			"style": {
+				"navigationBarTitleText": "申报管理"
+			}
+		},
+        {
+			"path": "pages/declare/declare-system",
+			"style": {
+				"navigationBarTitleText": "申报系统"
+			}
+		},
+        {
+			"path": "pages/declare/fill-course",
+			"style": {
+				"navigationBarTitleText": "填报教程"
+			}
+		},
+        {
+			"path": "pages/declare/account",
+			"style": {
+				"navigationBarTitleText": "账号密码"
+			}
+		},
+        {
+			"path": "pages/archives/project-handle",
+			"style": {
+				"navigationBarTitleText": "项目管理"
+			}
+		},
+        {
+			"path": "pages/archives/node-fill",
+			"style": {
+				"navigationBarTitleText": "节点填报"
+			}
+		},
+        {
+			"path": "pages/archives/company-details",
+			"style": {
+				"navigationBarTitleText": "企业一张表"
+			}
+		},
+		{
+			"path": "pages/archives/record-details",
+			"style": {
+				"navigationBarTitleText": "档案管理"
+			}
+		},
+        {
+			"path": "pages/working/index",
+			"style": {
+				"navigationBarTitleText": "环保工况"
+			}
+		},
+        {
+			"path": "pages/working/online-detection",
+			"style": {
+				"navigationBarTitleText": "在线监测"
+			}
+		},
+		{
+			"path": "pages/working/facility",
+			"style": {
+				"navigationBarTitleText": "环保设施"
+			}
+		},
+        {
+			"path": "pages/working/warning",
+			"style": {
+				"navigationBarTitleText": "预报警处置"
+			}
+		},
+        {
+			"path": "pages/working/disposal-warning",
+			"style": {
+				"navigationBarTitleText": "在线预报警处置"
+			}
+		},
+  //       {
+		// 	"path": "pages/account/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "台账管理"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/menu",
+		// 	"style": {
+		// 		"navigationBarTitleText": "台账报表"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/list",
+		// 	"style": {
+		// 		"navigationBarTitleText": "台账报表"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/particulars",
+		// 	"style": {
+		// 		"navigationBarTitleText": "详情"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/menuMonitor",
+		// 	"style": {
+		// 		"navigationBarTitleText": "监测列表"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/listMonitor",
+		// 	"style": {
+		// 		"navigationBarTitleText": "监测列表"
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/account/particularsMonitor",
+		// 	"style": {
+		// 		"navigationBarTitleText": "详情"
+		// 	}
+		// },
+        {
+			"path": "pages/service/index",
+			"style": {
+				"navigationBarTitleText": "公众服务"
+			}
+        }
+	],
+    "subPackages":[
+        {
+            "root": "packPages",
+            "name": "subPack",
+            "pages": [
+				{
+					"path": "account/index",
+					"style": {
+						"navigationBarTitleText": "台账管理"
+					}
+				},
+				{
+					"path": "account/menu",
+					"style": {
+						"navigationBarTitleText": "台账报表"
+					}
+				},
+				{
+					"path": "account/list",
+					"style": {
+						"navigationBarTitleText": "台账报表"
+					}
+				},
+				{
+					"path": "account/particulars",
+					"style": {
+						"navigationBarTitleText": "详情"
+					}
+				},
+				{
+					"path": "account/menuMonitor",
+					"style": {
+						"navigationBarTitleText": "监测列表"
+					}
+				},
+				{
+					"path": "account/listMonitor",
+					"style": {
+						"navigationBarTitleText": "监测列表"
+					}
+				},
+				{
+					"path": "account/particularsMonitor",
+					"style": {
+						"navigationBarTitleText": "详情"
+					}
+				},
+				
+                {
+                    "path": "statistics/index",
+                    "style": {
+                        "navigationBarTitleText": "智慧中心"
+                    }
+                },
+                {
+                    "path": "company/index",
+                    "style": {
+                        "navigationBarTitleText": "技术单位"
+                    }
+                },
+                {
+                    "path": "company/details",
+                    "style": {
+                        "navigationBarTitleText": "技术单位"
+                    }
+                },
+                {
+                    "path": "remind/index",
+                    "style": {
+                        "navigationBarTitleText": "提醒汇总"
+                    }
+                },
+                {
+                    "path": "government-enterprise/index",
+                    "style": {
+                        "navigationBarTitleText": "政企通"
+                    }
+                },
+                {
+                    "path": "government-enterprise/notice",
+                    "style": {
+                        "navigationBarTitleText": "政务通知"
+                    }
+                },
+                {
+                    "path": "government-enterprise/warning",
+                    "style": {
+                        "navigationBarTitleText": "市局预警"
+                    }
+                },
+                {
+                    "path": "government-enterprise/warning-rectify",
+                    "style": {
+                        "navigationBarTitleText": "市局预警处置"
+                    }
+                },
+                {
+                    "path": "government-enterprise/check",
+                    "style": {
+                        "navigationBarTitleText": "监督检查"
+                    }
+                },
+                {
+                    "path": "government-enterprise/check-disposition",
+                    "style": {
+                        "navigationBarTitleText": "监督检查处置"
+                    }
+                },
+                {
+                    "path": "daily-inspection/index",
+                    "style": {
+                        "navigationBarTitleText": "日常巡检"
+                    }
+                },
+                {
+                    "path": "daily-inspection/safety-check",
+                    "style": {
+                        "navigationBarTitleText": "班组日常安全检查表"
+                    }
+                },
+                {
+                    "path": "daily-inspection/check-list",
+                    "style": {
+                        "navigationBarTitleText": "班组日常安全检查表"
+                    }
+                },
+                {
+                    "path": "environment-inspection/index",
+                    "style": {
+                        "navigationBarTitleText": "环保巡查"
+                    }
+                },
+                {
+                    "path": "environment-inspection/safety-check",
+                    "style": {
+                        "navigationBarTitleText": "巡查表单"
+                    }
+                },
+                {
+                    "path": "environment-inspection/check-list",
+                    "style": {
+                        "navigationBarTitleText": "巡查表单列表"
+                    }
+                },
+				{
+					"path": "statistics/components/online-alarm",
+                    "style": {
+                        "navigationBarTitleText": "在线报警"
+                    }
+				},
+				{
+					"path": "statistics/components/remind",
+                    "style": {
+                        "navigationBarTitleText": "项目提醒"
+                    }
+				},
+				{
+					"path": "statistics/components/report-detail",
+                    "style": {
+                        "navigationBarTitleText": "报表详情"
+                    }
+				},
+				{
+					"path": "statistics/components/report-list",
+                    "style": {
+                        "navigationBarTitleText": "报表列表"
+                    }
+				},
+				{
+					"path": "statistics/components/charts",
+                    "style": {
+                        "navigationBarTitleText": "智慧中心展示"
+                    }
+				},
+				{
+					"path": "statistics/components/environment-inspect",
+                    "style": {
+                        "navigationBarTitleText": "环保巡检/日常巡检"
+                    }
+				},
+				{
+					"path": "statistics/components/environment-detail",
+                    "style": {
+                        "navigationBarTitleText": "巡检详情"
+                    }
+				},
+				{
+					"path": "statistics/components/edit-patrol",
+                    "style": {
+                        "navigationBarTitleText": "编辑巡检"
+                    }
+				},
+				{
+					"path": "statistics/components/alarm-dispose",
+                    "style": {
+                        "navigationBarTitleText": "报警处置"
+                    }
+				},
+				{
+					"path": "statistics/components/alarm-edit",
+                    "style": {
+                        "navigationBarTitleText": "报警编辑"
+                    }
+				}
+            ]
+        }
+    ],
+    "preloadRule":{
+        "pages/index/index":{
+            "network":"all",
+            "packages":[
+                "subPack"
+            ]
+        }
+    },
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "重点行业管理平台",
+		"navigationBarBackgroundColor": "#fff",
+		"backgroundColor": "#fff"
+	},
+	"lazyCodeLoading": "requiredComponents"
+}

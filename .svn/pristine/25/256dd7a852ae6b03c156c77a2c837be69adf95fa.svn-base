@@ -1,0 +1,162 @@
+<template>
+  <view class="detail">
+       <view style="color:#5E85DE;padding:10px;font-weight:bold;font-size:18px" @click="go">一级标题</view>
+       <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;width:94%">
+        <view style="font-weight:bold">相关政策</view>
+			<view class="item-text" style="display:flex">
+			    <text>是否检查</text>
+				<radio-group name="radio" class="radio">
+						<label>
+							<radio value="radio1" /><text>是</text>
+						</label>
+						<label style="margin-left:10px">
+							<radio value="radio2" /><text>否</text>
+						</label>
+					</radio-group>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px">
+			    <text>情况说明</text>
+			    <textarea placeholder="" class="textarea"></textarea>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px;align-items:center">
+			    <text>上传内容</text>
+			   <uni-file-picker limit="9" style="width:460rpx;margin-left:10px"></uni-file-picker>
+			</view>
+		</card>
+         <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;width:94%">
+        <view style="font-weight:bold">政策法规</view>
+			<view class="item-text" style="display:flex">
+			    <text>是否检查</text>
+				<radio-group name="radio" class="radio">
+						<label>
+							<radio value="radio1" /><text>是</text>
+						</label>
+						<label style="margin-left:10px">
+							<radio value="radio2" /><text>否</text>
+						</label>
+					</radio-group>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px">
+			    <text>情况说明</text>
+			    <textarea placeholder="" class="textarea"></textarea>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px;align-items:center">
+			    <text>上传内容</text>
+			   <uni-file-picker limit="9" style="width:460rpx;margin-left:10px"></uni-file-picker>
+			</view>
+		</card>
+         <view style="color:#5E85DE;padding:10px;font-weight:bold;font-size:18px" @click="go">一级标题</view>
+       <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;width:94%">
+        <view style="font-weight:bold">废水 收集 处理</view>
+			<view class="item-text" style="display:flex">
+			    <text>是否检查</text>
+				<radio-group name="radio" class="radio">
+						<label>
+							<radio value="radio1" /><text>是</text>
+						</label>
+						<label style="margin-left:10px">
+							<radio value="radio2" /><text>否</text>
+						</label>
+					</radio-group>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px">
+			    <text>情况说明</text>
+			    <textarea placeholder="" class="textarea"></textarea>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px;align-items:center">
+			    <text>上传内容</text>
+			   <uni-file-picker limit="9" style="width:460rpx;margin-left:10px"></uni-file-picker>
+			</view>
+		</card>
+         <view style="color:#5E85DE;padding:10px;font-weight:bold;font-size:18px" @click="go">备注</view>
+       <card :title="info.qymc" :titleStyle="titleStyle" style="margin-left:10px;margin-top:10px;margin-bottom:20px;width:94%">
+        <view style="font-weight:bold">废水 收集 处理</view>
+			<view class="item-text" style="display:flex">
+			    <text>是否检查</text>
+				<radio-group name="radio" class="radio">
+						<label>
+							<radio value="radio1" /><text>是</text>
+						</label>
+						<label style="margin-left:10px">
+							<radio value="radio2" /><text>否</text>
+						</label>
+					</radio-group>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px">
+			    <text>情况说明</text>
+			    <textarea placeholder="" class="textarea"></textarea>
+			</view>
+			<view class="item-text" style="display:flex;margin-top:10px;align-items:center">
+			    <text>上传内容</text>
+			   <uni-file-picker limit="9" style="width:460rpx;margin-left:10px"></uni-file-picker>
+			</view>
+		</card>
+        <view style="padding-bottom:100rpx;display:flex;justify-content:center">
+            <button class="btn" style="margin-right:10px">保存草稿</button>
+            <button class="btn">巡检完成</button>
+        </view>
+  </view>
+</template>
+
+<script>
+import Card from '@/components/Card.vue'
+export default {
+     components: {
+        Card
+    },
+    data(){
+        return {
+              titleStyle: {
+                fontSize: '28rpx',
+                color: '#2C8BFF',
+                textAlign: 'center',
+            },
+            info:{},
+			imageStyles: {
+					width: 64,
+					height: 64,
+					border: {
+					}
+				},
+        }
+    }
+}
+</script>
+
+<style scoped lang="scss">
+    .btn {
+        width: 30%;
+        background-color: #169BD5;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        color: #fff;
+        font-size:14px;
+        margin-top:10px;
+        ::v-deep uni-button {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+	.radio {
+		margin-left: 10px;
+	}
+	::v-deep .uni-radio-input {
+		border-radius: 0;
+		width: 16px;
+		height: 16px;
+	}
+	.textarea {
+     border: 1px solid #ccc;
+     flex: 1;
+	 border-radius: 5px;
+	 margin-left: 10px;
+	 font-size: 14px;
+	 height: 50px;
+	}
+	.timepicker {
+		::v-deep .u-input--square {
+			height: 15px;
+		}
+	}
+</style>

@@ -1,0 +1,52 @@
+<template>
+	<view style="height: 750rpx">
+		<l-echart ref="chart" :is-disable-scroll = true></l-echart>
+	</view>
+</template>
+
+<script>
+	import * as echarts from 'echarts';
+	export default {
+		data() {
+			return {
+				
+			}
+		},
+		mounted() {
+			this.$refs.chart.init(echarts, chart=> {
+				let option = {
+					legend: {},
+					tooltip: {},
+					dataset: {
+						source: [
+							['product', '台账数量', '巡检量', '发现问题数'],
+							['1月', 43.3, 85.8, 93.7],
+							['2月', 83.1, 73.4, 55.1],
+							['3月', 11.4, 65.2, 82.5],
+							['4月', 72.4, 53.9, 39.1],
+                            ['5月', 73.4, 53.9, 39.1],
+                            ['6月', 74.4, 53.9, 39.1],
+                            ['7月', 75.4, 53.9, 39.1],
+                            ['8月', 76.4, 53.9, 39.1],
+                            ['9月', 77.4, 53.9, 39.1],
+                            ['10月', 78.4, 53.9, 39.1],
+                            ['11月', 79.4, 53.9, 39.1],
+                            ['12月', 80.4, 53.9, 39.1]
+						]
+					},
+					xAxis: {type: 'category'},
+					yAxis: {},
+					// Declare several bar series, each will be mapped
+					// to a column of dataset.source by default.
+					series: [
+						{type: 'bar'},
+						{type: 'bar'},
+						{type: 'bar'}
+					]
+				}
+				chart.setOption(option);
+				
+			});
+		}
+	}
+</script>
