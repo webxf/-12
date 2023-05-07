@@ -73,6 +73,26 @@ const statistics = {
     getsbDate:{
         url:'/qyjg/index/getSbglCount',
         method:'get'
+    },
+    //上传信息
+    postsxjDate:{
+        url:'/qyjg/zhzx/xjcl/deal',
+        method:'post'
+    },
+    //政企通
+    getzqtDate:{
+        url:'/qyjg/index/listZqt',
+        method:'get'
+    },
+    //环保工况数据
+    // gethbgkDate:{
+    //     url:'/qyjg/index/listZqt',
+    //     method:'get'
+    // }
+    //因子数据
+    getyzDate:{
+        url:'/qyjg/zhzx/zhzx/ycpkyzcb',
+        method:'get' 
     }
 }
 export default statistics
